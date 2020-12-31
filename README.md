@@ -47,21 +47,21 @@ add some 1D, 1W,... buttons
 add X axis, move the dollar display?
 add date under dollar display, calculated by mouse x coordinate
 ## day :
-10 minute candles = day = <100 candles
-1 hr candles = week(5 days) = <100 candles
-1 day candles = month(4 weeks/20 days) = ~25 candles
-1 day candles = 3 months = ~75 candles
-1 week candles = 1 year ~52 candles
-PAPER TRADER: 1 day candles, over ALL
-ROBINHOOD:
-DAY- 96, 10 min candles
-WEEK- 25, 1 hr candles
-MONTH- 20, 1 day candles(4 weeks)
-3 MONTH - 60, 1 day candles(12 weeks)
-YEAR - 52, 1 week candles
+* 10 minute candles = day = <100 candles
+* 1 hr candles = week(5 days) = <100 candles
+* 1 day candles = month(4 weeks/20 days) = ~25 candles
+* 1 day candles = 3 months = ~75 candles
+* 1 week candles = 1 year ~52 candles
+* PAPER TRADER: 1 day candles, over ALL
+* ROBINHOOD:
+ * DAY- 96, 10 min candles
+ * WEEK- 25, 1 hr candles
+ * MONTH- 20, 1 day candles(4 weeks)
+ * 3 MONTH - 60, 1 day candles(12 weeks)
+ * YEAR - 52, 1 week candles
 
 
-Future goals:
+### Future goals:
 RSI graph + paper trade calculation
 hard coded case?
 don't display indicator, just link them to TV or smth
