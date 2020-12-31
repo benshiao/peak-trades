@@ -4,6 +4,8 @@ App using React hooks, D3 graphs API, and Alpha Vantage stock data API.
 
 Built to visualize stock data and simple paper trading algorithms.
 
+[Google doc of my idea/goals](https://docs.google.com/document/d/11UJrVlfPGMeEB5gHMXxHPLhtzCMCDLPjFci9MkDDGLU/edit?usp=sharing)
+
 # Ben's Progress:
 Learn React JS 
 https://www.youtube.com/watch?v=sBws8MSXN7A
