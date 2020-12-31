@@ -53,12 +53,13 @@ add date under dollar display, calculated by mouse x coordinate
 * 1 day candles = 3 months = ~75 candles
 * 1 week candles = 1 year ~52 candles
 * PAPER TRADER: 1 day candles, over ALL
+
 * ROBINHOOD:
- ** DAY- 96, 10 min candles
- ** WEEK- 25, 1 hr candles
- ** MONTH- 20, 1 day candles(4 weeks)
- ** 3 MONTH - 60, 1 day candles(12 weeks)
- ** YEAR - 52, 1 week candles
+ * DAY- 96, 10 min candles
+ * WEEK- 25, 1 hr candles
+ * MONTH- 20, 1 day candles(4 weeks)
+ * 3 MONTH - 60, 1 day candles(12 weeks)
+ * YEAR - 52, 1 week candles
 
 
 ### Future goals:
