@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+.btn-primary{
+  background-color: seagreen !important;
+}
+/* Above is example of override a bootstrap thing, needa be specific, btn-primcary, not primary */
+
+.center{
+  margin: 0 auto;
+  width:80% /* value of your choice which suits your alignment */
+}
