@@ -10,14 +10,13 @@ const Candle = props => {
   const bar_height = bar_bottom - bar_top;
   const wick_top = pixelFor(data.high);
   const wick_bottom = pixelFor(data.low);
-
   return (
     <>
       <rect
         x={x - candle_width / 2}
         y={bar_top}
         width={candle_width}
-        height={bar_height}
+        height={data.open===data.close? 1 :Math.abs(bar_height)}
         className={classNames({
           candle: true,
           up: up,

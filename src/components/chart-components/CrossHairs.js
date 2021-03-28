@@ -13,7 +13,7 @@ const CrossHairs = props => {
       <line
         x1={0}
         y1={y}
-        x2={chart_dims.pixel_width}
+        x2={chart_dims.pixel_width * 1.025}
         y2={y}
         className={classNames({
           cross_hair: true,

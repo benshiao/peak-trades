@@ -1,22 +1,9 @@
   
-  .sidebar {
-    background-color: #171742;
-  }
-  
-  .content {
-    background: rgb(26, 30, 80);
-    background: linear-gradient(
-      45deg,
-      rgba(26, 30, 80, 1) 0%,
-      rgba(46, 87, 126, 1) 50%,
-      rgba(57, 108, 144, 1) 100%
-    );
-    color: white;
-  }
-  
   .chart {
-    background-color: #1f234b;
+    background: transparent;
+    border-radius: 10px;
     color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
   }
   
   .candle {

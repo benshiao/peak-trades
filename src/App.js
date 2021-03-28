@@ -1,54 +1,35 @@
 import React from 'react';
 import { Header } from './components/Header';
-import { Balance } from './components/Balance';
-import { IncomeExpenses } from './components/IncomeExpenses';
-import { TransactionList } from './components/TransactionList';
-import { AddTransaction } from './components/AddTransaction';
-import { SearchResults } from './components/SearchResults';
+import { BacktestList } from './components/BacktestList';
+import { AddBacktest } from './components/AddBacktest';
 import { GraphSection } from './components/GraphSection';
+import styled from "styled-components";
 
 import { GlobalProvider } from './context/GlobalState';
 
 import './App.css';
 
+
+const CSS = styled.div`
+  // background: linear-gradient(-75deg, #9dc88d, #4d774e, #164a41);
+  // background-size: 100% 200%;
+
+  background: #3d3d4a;
+  }
+`;
+
 function App() {
   return (
     <GlobalProvider>
+      <CSS>
       <Header />
-      <SearchResults />
       <GraphSection />
-      <Balance />
-      <IncomeExpenses />
-      <TransactionList />
-      <AddTransaction />
+      <AddBacktest />
+      <BacktestList />
+      </CSS>
     </GlobalProvider>
   );
 }
 
 export default App;
 
-/*
-import React, { useRef } from 'react';
-import { select } from "d3";
-
-line 15->
-const svgRef = useRef();
-useEffect( () = > {
-  consolglog(svgref)
-  const svg = select(svgRef.current);//now can use all d3 commands and stuff
-  svg.selectAll("circle").data(data)
-    .join(
-      enter => enter.append("circle")     //effects circles we add
-        .attr("r", value => value)
-        .attr("cx", value => value*2)
-        .attr("cy", value => value*2)
-        .attr("stroke", "red"),
-      update => update.attr("class", "updated"),    //effects circles that we update(exist in html alr)
-      exit => exit.remove()                         //delete else, or remove
-    )                                               //add .attr here to effect ALL circles
-
-}, []);
-
-html-->
-<svg ref = {svgRef}> </svg>
-*/
