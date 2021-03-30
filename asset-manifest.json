@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/peak-trades/static/css/main.56f8819f.chunk.css",
+    "main.js": "/peak-trades/static/js/main.97f56b4f.chunk.js",
+    "main.js.map": "/peak-trades/static/js/main.97f56b4f.chunk.js.map",
+    "runtime-main.js": "/peak-trades/static/js/runtime-main.0629b93d.js",
+    "runtime-main.js.map": "/peak-trades/static/js/runtime-main.0629b93d.js.map",
+    "static/js/2.6682fe3b.chunk.js": "/peak-trades/static/js/2.6682fe3b.chunk.js",
+    "static/js/2.6682fe3b.chunk.js.map": "/peak-trades/static/js/2.6682fe3b.chunk.js.map",
+    "index.html": "/peak-trades/index.html",
+    "static/css/main.56f8819f.chunk.css.map": "/peak-trades/static/css/main.56f8819f.chunk.css.map",
+    "static/js/2.6682fe3b.chunk.js.LICENSE.txt": "/peak-trades/static/js/2.6682fe3b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0629b93d.js",
+    "static/js/2.6682fe3b.chunk.js",
+    "static/css/main.56f8819f.chunk.css",
+    "static/js/main.97f56b4f.chunk.js"
+  ]
+}
