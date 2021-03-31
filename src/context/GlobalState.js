@@ -42,7 +42,7 @@ export const GlobalProvider = ({ children }) => {
         // If API limit: Alerts API limit reached, maintains current payload(stock data)
         // Else: update current payload
         if(data.Note){
-            alert("MAX API CALLS. Please wait a minute for more. Thank you for visitng my project! However, it was built using Alpha Vantage's standard API where the call frequency is 5 calls per minute and 500 calls per day.");
+            alert("MAX API CALLS. Please wait a minute for more. PeakTrades was built using Alpha Vantage's free API where the call frequency is 5 calls per minute.");
             dispatch({
                 type: 'MAX_API',
                 payload: data
