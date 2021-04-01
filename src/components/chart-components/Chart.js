@@ -199,7 +199,7 @@ const Chart = props => {
         <tspan fill='#898996'>Change</tspan> <tspan fill={candleChange(mouseCoords.x)>=0?"#81dfc4":"#d75b6d"}>{candleChange(mouseCoords.x)}%</tspan>
       </text>
       {/* Date Time */}
-      <text x='16' y="85" fill='#898996' fontSize='20'>
+      <text x="16" y="85" fill='#898996' fontSize='20'>
         {convertDate(candleDataAt(mouseCoords.x)['xAxis'])} 
       </text>
       </> : <text x='16' y='40' fontSize="25">{mouseOffChartJSX()}</text>}

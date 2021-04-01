@@ -30,7 +30,7 @@ export const BacktestList = () => {
       <>
         {backtests.length>0?
           <CSS>
-            <h3>Strategy Tester</h3>
+            <h3>Backtest Strategy Testing</h3>
             {backtests.map(backtest => (<Backtest key={backtest.id} backtest={backtest} />))}
           </CSS>
         :

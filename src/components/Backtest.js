@@ -61,7 +61,7 @@ const CSS = styled.div`
       outline: none;
       color: #373641;
       ::placeholder{
-        color: #898996;
+        color: #a5a5b0;
       }
       background: #dedfe4;
     }
@@ -88,7 +88,7 @@ const CSS = styled.div`
       outline: none;
       color: #373641;
       ::placeholder{
-        color: #898996;
+        color: #a5a5b0;
       }
       background: #dedfe4;
     }
@@ -298,6 +298,12 @@ export const Backtest = ({ backtest }) => {
     return myDate.toISOString().slice(0, 10);
   }
   
+  // Converts YYYY-MM-DD to DD/MM/YYYY
+  const formatDate = uglyDate => {
+    var array = (uglyDate || '').toString().split(/-/g);
+    array.push(array.shift());
+    return array.join('/') || null;
+  }
 
   const [tradeListData, setTradeListData] = useState([]);
 
@@ -307,7 +313,7 @@ export const Backtest = ({ backtest }) => {
   const [startDate, setStartDate] = useState(getOldDate());
   const [endDate, setEndDate] = useState(getTodayDate());
 
-  const [maxBags, setMaxBags] = useState(5);
+  const [maxBags, setMaxBags] = useState(15);
   const [initalBalance, setInitialBalance] = useState(10000);
   const [initalBuyType, setInitalBuyType] = useState('usd');
   const [initalBuyAmount, setInitalBuyAmount] = useState(1500);
@@ -450,7 +456,6 @@ export const Backtest = ({ backtest }) => {
         // End date reached... so stop iterating.
         break;
       }
-
       // Count Candles interated over
       candleCount++;
       
@@ -474,7 +479,7 @@ export const Backtest = ({ backtest }) => {
       if(bagList.length<pairSettings.maxBags && newBagVolume <= currentBalance && isBuyConditionMet(pairSettings.buyStrategyValue, curStockPrice, curIndicatorValue)){
         // Create and add bag to bagList, increment bagList.length. Automatically added by creating key.
         bagList.length++;
-        console.log("bag added");
+        //console.log("bag added");
         bagList[`${key}`] = {
           "sell-price-limit": +(1+(pairSettings.sellStrategyValue/100)) * curStockPrice,
           "buy-price": +curStockPrice,
@@ -518,10 +523,10 @@ export const Backtest = ({ backtest }) => {
       // End of Buy/Sell conditions
     }
     
-    console.log("iterating done", backtest, startDate, endDate, backtest.holdReturn);
+    //console.log("iterating done", backtest, startDate, endDate, backtest.holdReturn);
     // Iterating complete, finalize some data on compelted backtest algorithm
     backtest.holdReturn = (((backtest.endPrice / backtest.startPrice)-1) * 100).toFixed(2);
-    console.log("set holdret", backtest.holdReturn, "end/start", backtest.endPrice, backtest.startPrice);
+    //console.log("set holdret", backtest.holdReturn, "end/start", backtest.endPrice, backtest.startPrice);
     delete backtest.startPrice;
     backtest.profitPercentOnBalance = backtest.profitUSD / pairSettings.initalBalance;
     backtest.profitPercentOnTrades = backtest.profitUSD / (backtest.netSellVolume - backtest.profitUSD);
@@ -529,6 +534,11 @@ export const Backtest = ({ backtest }) => {
     
     // Update results display and sends tradeListData to TradeList.js in JSX below
     setTradeListData(backtest.tradeListData);
+  }
+
+  // Turns JSX input type to date
+  const onFocus = e =>{
+    e.currentTarget.type = "date";
   }
 
   const onSubmit = () => {
@@ -569,7 +579,7 @@ export const Backtest = ({ backtest }) => {
       alert("Standard Deviation must be greater than or equal to 0.5.");
     }else{
       // Calculation inputs valid
-      console.log(pairSettings);
+      //console.log(pairSettings);
 
       // Initialize Trade List Data(for final results)
       backtest.tradeListData = [];
@@ -589,28 +599,28 @@ export const Backtest = ({ backtest }) => {
     case 'RSI':
       indicatorSettingDOM = (<> 
         {/* Time Period(# candles in calc) */}
-          <label className="input-label" >Time Period:</label>
+          <label className="input-label" >Time Period (days):</label>
           <input className="input-flex" placeholder='14' onChange={(e) => setTimePeriod(e.target.value)} />
       </>);
       break;
     case 'EMA':
       indicatorSettingDOM = (<> 
         {/* Time Period(# candles in calc) */}
-        <label className="input-label">Time Period: </label>
+        <label className="input-label">Time Period (days): </label>
         <input className="input-flex" placeholder="9" onChange={(e) => setTimePeriod(e.target.value)} />
       </>);
       break;
     case 'SMA':
       indicatorSettingDOM = (<> 
         {/* Time Period(# candles in calc) */}
-        <label className="input-label">Time Period:</label>
+        <label className="input-label">Time Period (days):</label>
         <input className="input-flex" placeholder="9" onChange={(e) => setTimePeriod(e.target.value)} />
       </>);
       break;
     case 'BBANDS':
       indicatorSettingDOM = (<> 
         {/* Time Period(# candles in calc) */}
-        <label className="input-label">Time Period: </label>
+        <label className="input-label">Time Period (days): </label>
         <input className="input-flex" placeholder="20" onChange={(e) => setTimePeriod(e.target.value)} />
 
         {/* Standard deviation for both top/bot lines */}
@@ -701,15 +711,16 @@ export const Backtest = ({ backtest }) => {
 
         {/* Begin date for backtest */}
         <label className="input-label">Start Date:</label>
-        <input className="input-flex" type="date" value={getOldDate()} onChange={(e) => setStartDate(e.target.value)} />
+        <input className="input-flex" type="text" placeholder="IPO date (earliest)" onFocus={(e) => onFocus(e)} onChange={(e) => setStartDate(e.target.value)}/>
+              
 
         {/* End date for backtest */}
         <label className="input-label">End Date:</label>
-        <input className="input-flex" type="date" value={getTodayDate()} onChange={(e) => setEndDate(e.target.value)} />
+        <input className="input-flex" type="text" placeholder={formatDate(getTodayDate())} onFocus={(e) => onFocus(e)} onChange={(e) => setEndDate(e.target.value)}/>
               
         {/* Max number bags */}
         <label className="input-label">Max number of bags:</label>
-        <input className="input-flex" placeholder="5" onChange={(e) => setMaxBags(e.target.value)} />
+        <input className="input-flex" placeholder="15" onChange={(e) => setMaxBags(e.target.value)} />
 
         {/* Inital balance */}
         <label className="input-label">Inital balance (USD):</label>

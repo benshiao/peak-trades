@@ -4,23 +4,3 @@
 
   font-family:Montserrat,sans-serif;
 }
-.center{
-  margin: 0 auto;
-  width:80% /* value of your choice which suits your alignment */
-}
-
-.message_wrap {
-  height:350px;
-  padding: 1px;
-}
-.message_box {
-  font-size: large;
-  color: azure;
-  border:1px solid rgb(0, 0, 0);
-  background-color: #19471d;
-  padding: 10px;
-  width:auto;
-  height: inherit;
-  overflow-y:auto;
-  overflow-x:clip;
-}

@@ -71,12 +71,14 @@ const CSS = styled.div`
     opacity: 0;
   }
   .btn-text{
+    width:90%;
     color: #dedfe4;
+    display:inline;
   }
   .plus-icon{
     filter: invert(1);
     width: 8%;
-    vertical-align: -8%;
+    vertical-align: -30%;
     margin-right: 3%;
   }
 
@@ -99,22 +101,22 @@ export const AddBacktest = () => {
   if(current_symbol.length>0){
     return (
       <CSS>
-        <h3>Create a New Strategy</h3>
+        <h3>Select Technical Indicator(s)</h3>
         <button className="btn btn-one" onClick={() => onSubmit('RSI')}>
           <img className="plus-icon" src="https://img.icons8.com/android/24/000000/plus.png" alt=""/>
-          <tspan className=""> </tspan><tspan className="btn-text">Relative Strength Index (RSI)</tspan>
+          <div className="btn-text">Relative Strength Index (RSI)</div>
         </button>
         <button className="btn btn-one" onClick={() => onSubmit('EMA')}>
           <img className="plus-icon" src="https://img.icons8.com/android/24/000000/plus.png" alt=""/>
-          <tspan className="btn-text">Exponential Moving Average (EMA)</tspan>
+          <div className="btn-text">Exponential Moving Average (EMA)</div>
         </button>
         <button className="btn btn-one" onClick={() => onSubmit('SMA')}>
           <img className="plus-icon" src="https://img.icons8.com/android/24/000000/plus.png" alt=""/>
-          <tspan className="btn-text">Simple Moving Average (SMA)</tspan>
+          <div className="btn-text">Simple Moving Average (SMA)</div>
         </button>
         <button className="btn btn-one" onClick={() => onSubmit('BBANDS')}>
           <img className="plus-icon" src="https://img.icons8.com/android/24/000000/plus.png" alt=""/>
-          <tspan className="btn-text">Bollinger Bands (BB)</tspan>
+          <div className="btn-text">Bollinger Bands (BB)</div>
         </button>
       </CSS>
       )

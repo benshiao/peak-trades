@@ -5,24 +5,29 @@ import { SearchResults } from './SearchResults';
 import { GlobalContext } from '../context/GlobalState';
 
 const CSS = styled.div`
+  *{
+    font-family: 'Lato', sans-serif; 
+  }
 
+  .title{
+    font-size: 28px; 
+    font-weight: 300; 
+    color: #dedfe4;
+
+    position: absolute;
+    padding-left: 115px;
+  }
   .search {
     &__container {
-        padding-top: 10px;
-        padding-right: 9%;
+        width:25%;
     }
     
     &__title {
-        font-family: 'Lato', sans-serif; 
-        font-size: 28px; 
-        font-weight: 300; 
-        text-align: center;
-        color: #dedfe4;
+      font-size: 28px; 
+      font-weight: 300; 
+      text-align: left;
+      color: #dedfe4;
 
-        @media only screen and (max-width: 768px) {
-          padding: 0%;
-          font-size: 0%;
-        }
     }
     
     &__input {
@@ -50,18 +55,12 @@ const CSS = styled.div`
         backface-visibility: hidden;
         transform-style: preserve-3d;
 
-        @media only screen and (max-width: 768px) {
-          width: 200%;
-        }
         
         &::placeholder {
             color: #898996;
             text-transform: uppercase;
             font-weight: 520;
             letter-spacing: 1.5px;
-            @media only screen and (max-width: 768px) {
-              font-size: 0%;
-            }
         }
         
         &:hover,
@@ -79,10 +78,6 @@ const CSS = styled.div`
   .logo-img{
     width: 115px;
     padding: 12px 24px;
-    @media only screen and (max-width: 768px) {
-      width: 15%;
-      padding: 2%;
-    }
   }
 
   .credits{
@@ -92,14 +87,9 @@ const CSS = styled.div`
     font-weight: 350;
     text-align: center;
     color: white;
-    @media only screen and (max-width: 768px) {
-      padding: 0 0 0 60%;
-      font-size: 80%;
-    }
   }
 
   background: #373641;
-
 `;
 
 export const Header = () => {
@@ -120,12 +110,12 @@ export const Header = () => {
     <CSS>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossOrigin="anonymous"></link>
         
-      <nav className="navbar">
+      <div className="navbar">
       
         <img className="logo-img" src="cs-chart.png" alt=""/>
-        <label className="search__title" >PeakTrades</label>
+        <div className="title" >PeakTrades</div>
           
-        <div className="col-4 center search__container"> 
+        <div className="search__container"> 
           <form  onSubmit={onSubmit}>
             <label className="search__title">Search Comapny:</label>
             <input className="search__input" type="text" placeholder="Search Tickers..." onChange={(e) => setSearch(e.target.value)}/>
@@ -137,7 +127,7 @@ export const Header = () => {
           by <a className="" href="https://www.linkedin.com/in/benshiao" rel="noreferrer" target="_blank">Benjamin Shiao</a>
         </h6>
 
-      </nav>
+      </div>
     </CSS>
   )
 }

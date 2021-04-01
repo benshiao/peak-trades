@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
 
-const Trade = props => {
-  const { trade } = props;
-
-
   const CSS = styled.div`
   
     .trade-card{
@@ -41,6 +37,10 @@ const Trade = props => {
       width: 60%;
     }
   `;
+
+const Trade = props => {
+  const { trade } = props;
+
   return (
     <CSS>
       <div className="trade-card">
