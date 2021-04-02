@@ -75,7 +75,7 @@ export const GlobalProvider = ({ children }) => {
         // If API limit: alerts, maintains current results(if any)
         // Else: updates search results display properly
         if(data.Note){
-            alert("MAX API CALLS. Please wait a minute for more. Thank you for visitng my project! However, it was built using Alpha Vantage's standard API where the call frequency is 5 calls per minute and 500 calls per day.");
+            alert("MAX API CALLS. Please wait a minute for more. However, it was built using Alpha Vantage's standard API where the call frequency is 5 calls per minute and 500 calls per day.");
             // Maintains current search results
             dispatch({
                 type: 'MAX_API',
@@ -158,7 +158,7 @@ export const GlobalProvider = ({ children }) => {
         // If API limit: Alerts API limit reached, maintains current payload(stock data)
         // Else: update current payload
         if(data.Note){
-            alert("MAX API CALLS. Please wait a minute for more. Thank you for visitng my project! However, it was built using Alpha Vantage's standard API where the call frequency is 5 calls per minute and 500 calls per day.");
+            alert("MAX API CALLS. Please wait a minute for more. However, it was built using Alpha Vantage's standard API where the call frequency is 5 calls per minute and 500 calls per day.");
             dispatch({
                 type: 'MAX_API',
                 payload: [graphType,data]
