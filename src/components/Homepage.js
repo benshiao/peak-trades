@@ -10,7 +10,7 @@ const CSS = styled.div`
 
     padding: 5%;
     margin: 0%;
-    padding-top: 120px;
+    padding-top: 140px;
 
     .intro-text{  
       padding-top: 8%;
