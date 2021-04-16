@@ -40,7 +40,7 @@ const CSS = styled.div`
 //graphSymbol(mySymbol.symbol, 'day', true)
 export const SearchItem = ({ mySymbol }) => {
   const { graphSymbol } = useContext(GlobalContext);
-
+  console.log(mySymbol.symbol, mySymbol.name);
   return (
     <div>
       <CSS>

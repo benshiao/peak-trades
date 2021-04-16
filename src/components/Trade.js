@@ -36,6 +36,20 @@ import styled from "styled-components";
       font-size: 14px;
       width: 60%;
     }
+    .result-title-profit{
+      text-align: left;
+      color: #898996;
+      font-size: 12px;
+      width: 1%;
+
+    }
+    .result-output-profit{
+      text-align: right;
+      color: #dedfe4;
+      font-size: 14px;
+      width: 99%;
+
+    }
   `;
 
 const Trade = props => {
@@ -46,43 +60,43 @@ const Trade = props => {
       <div className="trade-card">
         <div className="trade-card-sub">
           <div className="result-item">
-            <label className="result-title">Buy date: </label>
+            <label className="result-title">Buy Date: </label>
             <label className="result-output">{trade.buyDate}</label>
           </div>
           <div className="result-item">
-            <label className="result-title">Buy price: </label>
+            <label className="result-title">Buy Price: </label>
             <label className="result-output">{trade.buyPrice}</label>
           </div>
           <div className="result-item">
-            <label className="result-title">Indicator at Buy: </label>
-            <label className="result-output">{trade.indicatorAtBuy}</label>
+            <label className="result-title">Indicator Value at Buy: </label>
+            <label className="result-output">{trade.indicatorAtBuy.toFixed(2)}</label>
           </div>
         </div>
         <div className="trade-card-sub">
           <div className="result-item">
-            <label className="result-title">Sell date:</label>
+            <label className="result-title">Sell Date:</label>
             <label className="result-output">{trade.sellDate}</label>
           </div>
           <div className="result-item">
-            <label className="result-title">Sell price: </label>
+            <label className="result-title">Sell Price: </label>
             <label className="result-output">{trade.sellPrice}</label>
           </div>
           <div className="result-item">
-            <label className="result-title">Indicator at Sell: </label>
-            <label className="result-output">{trade.indicatorAtSell}</label>
+            <label className="result-title">Indicator Value at Sell: </label>
+            <label className="result-output">{trade.indicatorAtSell.toFixed(2)}</label>
           </div>
         </div>
         <div className="trade-card-sub">
           <div className="result-item">
-            <label className="result-title">Number of shares:</label>
+            <label className="result-title" data-tooltip="Number of shares for trade." data-tooltip-location="left">Num of Shares:</label>
             <label className="result-output"> {trade.numShares.toFixed(2)}</label>
           </div>
           <div className="result-item">
-            <label className="result-title">Profit Percent: </label>
-            <label className="result-output">${trade.profitUSD.toFixed(2)}({trade.profitPercent>0?"+":""}{(trade.profitPercent*100).toFixed(2)}%)</label>
+            <label className="result-title-profit" data-tooltip="Profit from this position." data-tooltip-location="left">Profit: </label>
+            <label className="result-output-profit">${trade.profitUSD.toFixed(2)}({trade.profitPercent>0?"+":""}{(trade.profitPercent*100).toFixed(2)}%)</label>
           </div>
           <div className="result-item">
-            <label className="result-title"> Candle Length: </label>
+            <label className="result-title" data-tooltip="Number of days between opening and closing this position."> Num Candles in Trade: </label>
             <label className="result-output">{trade.candleLength}</label>
           </div>
         </div>

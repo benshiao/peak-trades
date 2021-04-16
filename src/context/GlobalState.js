@@ -5,7 +5,7 @@ import AppReducer from './AppReducer';
 
 // Initial state
 const initialState = {
-    backtests: [],     // starter code thing, can delete later
+    backtests: [],     // Backtest list
     symbol_list: [],      // user input search results (1 API call)
     graphData_AV_API: {}, // graphs historical stock data (1 API call)
     current_symbol: '',   // current stock symbol being graphed
@@ -26,15 +26,15 @@ export const GlobalProvider = ({ children }) => {
     // Actions
     function deleteBacktest(id) {
         dispatch({
-        type: 'DELETE_BACKTEST',
-        payload: id
+            type: 'DELETE_BACKTEST',
+            payload: id
         });
     }
 
     function addBacktest(backtest) {
         dispatch({
-        type: 'ADD_BACKTEST',
-        payload: backtest
+            type: 'ADD_BACKTEST',
+            payload: backtest
         });
     }
 
@@ -175,6 +175,9 @@ export const GlobalProvider = ({ children }) => {
                 payload: [graphType,data, selectedCompany]
             });
         }
+
+        // Scroll to top, makes sure user sees graph
+        window.scrollTo(0, 0)
     }
 
     return (<GlobalContext.Provider value={{

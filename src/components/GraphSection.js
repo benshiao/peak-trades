@@ -9,6 +9,7 @@ const CSS = styled.div`
 
   .chart-info-area{
     margin: 0 16% 0 16%;
+    padding-top: 120px;
   }
 
   .stock-info{

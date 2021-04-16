@@ -16,10 +16,14 @@ const CSS = styled.div`
 
     position: absolute;
     padding-left: 115px;
+    top: 25px;
   }
   .search {
     &__container {
-        width:25%;
+        width:55%;
+        float:left;
+        padding-left: 20%;
+        padding-top: 0px;
     }
     
     &__title {
@@ -77,19 +81,34 @@ const CSS = styled.div`
 
   .logo-img{
     width: 115px;
-    padding: 12px 24px;
+    padding: 15px 24px;
   }
 
   .credits{
-    padding-top: 10px;
-    padding-right: 2%;
+    float:right;
+    width: 15%;
     font-size: 15px;
     font-weight: 350;
     text-align: center;
     color: white;
+    padding-top: 35px
   }
 
-  background: #373641;
+  
+  
+  background: #32323b;
+  .header{
+    width:100%;
+    height: 100px;
+    z-index:99;
+    position: fixed;
+    background: #32323b;
+  }
+
+  .search-credits{
+    width:80%;
+    float:right;
+  }
 `;
 
 export const Header = () => {
@@ -109,25 +128,29 @@ export const Header = () => {
   return (
     <CSS>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossOrigin="anonymous"></link>
-        
-      <div className="navbar">
+      <nav className="header">
       
         <img className="logo-img" src="cs-chart.png" alt=""/>
         <div className="title" >PeakTrades</div>
           
-        <div className="search__container"> 
-          <form  onSubmit={onSubmit}>
-            <label className="search__title">Search Comapny:</label>
-            <input className="search__input" type="text" placeholder="Search Tickers..." onChange={(e) => setSearch(e.target.value)}/>
-            
-          </form>
-          <SearchResults />
-        </div>
-        <h6 className="credits">
-          by <a className="" href="https://www.linkedin.com/in/benshiao" rel="noreferrer" target="_blank">Benjamin Shiao</a>
-        </h6>
 
-      </div>
+        <div className="search-credits">
+          <div className="search__container"> 
+            <form  onSubmit={onSubmit}>
+              <label className="search__title">Search Comapny:</label>
+              <input className="search__input" type="text" placeholder="Search Tickers..." onChange={(e) => setSearch(e.target.value)}/>
+              
+            </form>
+            <SearchResults />
+          </div>
+
+
+          <div className="credits">
+            by <a className="" href="https://www.linkedin.com/in/benshiao" rel="noreferrer" target="_blank">Benjamin Shiao</a>
+          </div>
+        </div>
+
+      </nav>
     </CSS>
   )
 }

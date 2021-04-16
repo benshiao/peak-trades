@@ -250,6 +250,35 @@ const CSS = styled.div`
     width: 50%;
   }
 
+  .conclusion-title{
+    text-align: left;
+    color: #898996;
+    font-size: 14px;
+    width: 35%;
+  }
+  .backtest-won{
+    text-align: right;
+    font-size: 16px;
+    width: 65%;
+
+    color: #81dfc4;
+  }
+
+  .backtest-lost{
+    text-align: right;
+    font-size: 16px;
+    width: 65%;
+
+    color: #d75b6d;
+  }
+
+  .backtest-null{
+    text-align: right;
+    font-size: 16px;
+    width: 65%;
+
+    color: #dedfe4;
+  }
   /* middle card CSS end */
   /* right card CSS begin */
   .trades-scroll{
@@ -263,6 +292,159 @@ const CSS = styled.div`
   }
 
   /* right card CSS end */
+
+  /* Tooltip begin */
+  [data-tooltip] {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Positioning and visibility settings of the tooltip */
+  [data-tooltip]:before,
+  [data-tooltip]:after {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    left: 50%;
+    bottom: calc(100% + 5px); /* 5px is the size of the arrow */
+    pointer-events: none;
+    transition: 0.2s;
+    will-change: transform;
+  }
+
+  /* The actual tooltip with a dynamic width */
+  [data-tooltip]:before {
+    content: attr(data-tooltip);
+    padding: 10px 18px;
+    min-width: 50px;
+    max-width: 300px;
+    width: max-content;
+    width: -moz-max-content;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: rgba(59, 72, 80, 0.9);
+    background-image: linear-gradient(30deg,
+      rgba(59, 72, 80, 0.44),
+      rgba(59, 68, 75, 0.44),
+      rgba(60, 82, 88, 0.44));
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    text-align: center;
+    white-space: pre-wrap;
+    transform: translate(-50%, -5px) scale(0.5);
+  }
+
+  /* Tooltip arrow */
+  [data-tooltip]:after {
+    content: '';
+    border-style: solid;
+    border-width: 5px 5px 0px 5px; /* CSS triangle */
+    border-color: rgba(55, 64, 70, 0.9) transparent transparent transparent;
+    transition-duration: 0s; /* If the mouse leaves the element, 
+                                the transition effects for the 
+                                tooltip arrow are "turned off" */
+    transform-origin: top;   /* Orientation setting for the
+                                slide-down effect */
+    transform: translateX(-50%) scaleY(0);
+  }
+
+  /* Tooltip becomes visible at hover */
+  [data-tooltip]:hover:before,
+  [data-tooltip]:hover:after {
+    visibility: visible;
+    opacity: 1;
+  }
+  /* Scales from 0.5 to 1 -> grow effect */
+  [data-tooltip]:hover:before {
+    transition-delay: 0.3s;
+    transform: translate(-50%, -5px) scale(1);
+  }
+  /* 
+    Arrow slide down effect only on mouseenter (NOT on mouseleave)
+  */
+  [data-tooltip]:hover:after {
+    transition-delay: 0.5s; /* Starting after the grow effect */
+    transition-duration: 0.2s;
+    transform: translateX(-50%) scaleY(1);
+  }
+
+  /* LEFT */
+  /* Tooltip + arrow */
+  [data-tooltip-location="left"]:before,
+  [data-tooltip-location="left"]:after {
+    left: auto;
+    right: calc(100% + 5px);
+    bottom: 50%;
+  }
+
+  /* Tooltip */
+  [data-tooltip-location="left"]:before {
+    transform: translate(-5px, 50%) scale(0.5);
+  }
+  [data-tooltip-location="left"]:hover:before {
+    transform: translate(-5px, 50%) scale(1);
+  }
+
+  /* Arrow */
+  [data-tooltip-location="left"]:after {
+    border-width: 5px 0px 5px 5px;
+    border-color: transparent transparent transparent rgba(55, 64, 70, 0.9);
+    transform-origin: left;
+    transform: translateY(50%) scaleX(0);
+  }
+  [data-tooltip-location="left"]:hover:after {
+    transform: translateY(50%) scaleX(1);
+  }
+
+
+
+  /* RIGHT */
+  [data-tooltip-location="right"]:before,
+  [data-tooltip-location="right"]:after {
+    left: calc(100% + 5px);
+    bottom: 50%;
+  }
+
+  [data-tooltip-location="right"]:before {
+    transform: translate(5px, 50%) scale(0.5);
+  }
+  [data-tooltip-location="right"]:hover:before {
+    transform: translate(5px, 50%) scale(1);
+  }
+
+  [data-tooltip-location="right"]:after {
+    border-width: 5px 5px 5px 0px;
+    border-color: transparent rgba(55, 64, 70, 0.9) transparent transparent;
+    transform-origin: right;
+    transform: translateY(50%) scaleX(0);
+  }
+  [data-tooltip-location="right"]:hover:after {
+    transform: translateY(50%) scaleX(1);
+  }
+
+
+
+  /* BOTTOM */
+  [data-tooltip-location="bottom"]:before,
+  [data-tooltip-location="bottom"]:after {
+    top: calc(100% + 5px);
+    bottom: auto;
+  }
+
+  [data-tooltip-location="bottom"]:before {
+    transform: translate(-50%, 5px) scale(0.5);
+  }
+  [data-tooltip-location="bottom"]:hover:before {
+    transform: translate(-50%, 5px) scale(1);
+  }
+
+  [data-tooltip-location="bottom"]:after {
+    border-width: 0px 5px 5px 5px;
+    border-color: transparent transparent rgba(55, 64, 70, 0.9) transparent;
+    transform-origin: bottom;
+  }
+
+  /* End of tooltips */
 
 `;
 
@@ -314,9 +496,9 @@ export const Backtest = ({ backtest }) => {
   const [endDate, setEndDate] = useState(getTodayDate());
 
   const [maxBags, setMaxBags] = useState(15);
-  const [initalBalance, setInitialBalance] = useState(10000);
+  const [initalBalance, setInitialBalance] = useState(3000);
   const [initalBuyType, setInitalBuyType] = useState('usd');
-  const [initalBuyAmount, setInitalBuyAmount] = useState(1500);
+  const [initalBuyAmount, setInitalBuyAmount] = useState(100);
   const [buyStrategyValue, setBuyStrategyValue] = useState(defaultBuyStrat());
   const [buyStrategyType, setBuyStrategyType] = useState('Real Middle Band'); // Used for Bollinger upper/middle/lower
   const [sellStrategyValue, setSellStrategyValue] = useState(1);
@@ -349,7 +531,9 @@ export const Backtest = ({ backtest }) => {
         return curIndicatorValue < buyStrategyValue;
       default:
         // case EMA, SMA, BB (all cases where indicator is a price of stock)
-        return curStockPrice <= (curIndicatorValue * ((100.0 + buyStrategyValue)/100.0))
+        console.log(`price is ${curStockPrice}, indicator is ${curIndicatorValue}, buy Price`, (curIndicatorValue * ((100.0 + buyStrategyValue)/100.0)), curStockPrice <= (curIndicatorValue * ((100.0 + buyStrategyValue)/100.0)));
+
+        return curStockPrice <= (curIndicatorValue * ((100.0 + buyStrategyValue)/100.0));
     }
   }
 
@@ -428,9 +612,12 @@ export const Backtest = ({ backtest }) => {
     }
     response = await fetch(`https://www.alphavantage.co/query?function=${backtest.indicator}&symbol=${current_symbol}&interval=daily&time_period=${paperAPICall.timePeriod}&series_type=${paperAPICall.seriesType}${optionalParameters}&apikey=CQ5JZQYM4DG0OODA`);
     stockIndicatorData = await response.json();
+    backtest.didRun = true;
+
     // Catches MAX API
     if(stockIndicatorData.Note){
       alert("MAX API CALLS. Please wait a minute for more. Thank you for visitng my project! However, it was built using Alpha Vantage's standard API where the call frequency is 5 calls per minute and 500 calls per day.");
+      backtest.didRun = false;
       return;
     }
 
@@ -479,7 +666,7 @@ export const Backtest = ({ backtest }) => {
       if(bagList.length<pairSettings.maxBags && newBagVolume <= currentBalance && isBuyConditionMet(pairSettings.buyStrategyValue, curStockPrice, curIndicatorValue)){
         // Create and add bag to bagList, increment bagList.length. Automatically added by creating key.
         bagList.length++;
-        //console.log("bag added");
+        console.log("bag added", bagList);
         bagList[`${key}`] = {
           "sell-price-limit": +(1+(pairSettings.sellStrategyValue/100)) * curStockPrice,
           "buy-price": +curStockPrice,
@@ -551,6 +738,11 @@ export const Backtest = ({ backtest }) => {
       stdDeviation: +stdDeviation
     };
 
+    // Trivial value, set to 2
+    if(paperAPICall.timePeriod===1){
+      paperAPICall.timePeriod = 2;
+    }
+
     const pairSettings = {
       maxBags: +maxBags,
       initalBalance: +initalBalance,
@@ -599,32 +791,32 @@ export const Backtest = ({ backtest }) => {
     case 'RSI':
       indicatorSettingDOM = (<> 
         {/* Time Period(# candles in calc) */}
-          <label className="input-label" >Time Period (days):</label>
+          <label className="input-label" data-tooltip="Number of prior days technical indicator is calculated from.">Time Period (days):</label>
           <input className="input-flex" placeholder='14' onChange={(e) => setTimePeriod(e.target.value)} />
       </>);
       break;
     case 'EMA':
       indicatorSettingDOM = (<> 
         {/* Time Period(# candles in calc) */}
-        <label className="input-label">Time Period (days): </label>
+        <label className="input-label" data-tooltip="Number of prior days technical indicator is calculated from.">Time Period (days): </label>
         <input className="input-flex" placeholder="9" onChange={(e) => setTimePeriod(e.target.value)} />
       </>);
       break;
     case 'SMA':
       indicatorSettingDOM = (<> 
         {/* Time Period(# candles in calc) */}
-        <label className="input-label">Time Period (days):</label>
+        <label className="input-label" data-tooltip="Number of prior days technical indicator is calculated from.">Time Period (days):</label>
         <input className="input-flex" placeholder="9" onChange={(e) => setTimePeriod(e.target.value)} />
       </>);
       break;
     case 'BBANDS':
       indicatorSettingDOM = (<> 
         {/* Time Period(# candles in calc) */}
-        <label className="input-label">Time Period (days): </label>
+        <label className="input-label" data-tooltip="Number of prior days technical indicator is calculated from.">Time Period (days): </label>
         <input className="input-flex" placeholder="20" onChange={(e) => setTimePeriod(e.target.value)} />
 
         {/* Standard deviation for both top/bot lines */}
-        <label className="input-label">Standard Deviation for upper/lower lines:</label>
+        <label className="input-label" data-tooltip="Standard devation for calculating upper and lower bollinger bands.">Standard Deviation for upper/lower lines:</label>
         <input className="input-flex" placeholder="2" onChange={(e) => setStdDeviation(e.target.value)} />
       </>);
       break;
@@ -638,7 +830,7 @@ export const Backtest = ({ backtest }) => {
     case 'RSI':
       buyStrategyDOM = (<> 
         {/* Buy Strategy RSI */}
-        <label className="input-label">Buy when RSI less than</label>
+        <label className="input-label" data-tooltip="Open a position on stock for this condition.">Buy when RSI less than</label>
         <input className="input-inline" placeholder='30' onChange={(e) => setBuyStrategyValue(e.target.value)} />
         <br/>
       </>);
@@ -646,27 +838,27 @@ export const Backtest = ({ backtest }) => {
     case 'EMA':
       buyStrategyDOM = (<> 
         {/* Buy strategy % away */}
-        <label className="input-label">Buy at price</label>
+        <label className="input-label" data-tooltip="Open a position on stock for this condition.">Buy at price</label>
         <input className="input-inline" placeholder="-3" onChange={(e) => setBuyStrategyValue(e.target.value)}/>
-        <label className="input-label">% away from the EMA line. </label>
-        <label className="input-label-sub">(3 = 3% above, -3 = 3% below)</label>
+        <label className="input-label" data-tooltip="Open a position on stock for this condition.">% away from the EMA line. </label>
+        <label className="input-label-sub" data-tooltip="Positive values will open a position when the stock price is X% above the indicator value. Negative values will open a position when the stock price is X% below the indicator value.">(3 = 3% above, -3 = 3% below)</label>
         <br/>
       </>);
       break;
     case 'SMA':
       buyStrategyDOM = (<> 
         {/* Buy strategy % away */}
-        <label className="input-label">Buy at price</label>
+        <label className="input-label" data-tooltip="Open a position on stock for this condition.">Buy at price</label>
         <input className="input-inline" placeholder="-3" onChange={(e) => setBuyStrategyValue(e.target.value)}/>
-        <label className="input-label">% away from the SMA line. </label>
-        <label className="input-label-sub">(3 = 3% above, -3 = 3% below)</label>
+        <label className="input-label" data-tooltip="Open a position on stock for this condition.">% away from the SMA line. </label>
+        <label className="input-label-sub" data-tooltip="Positive values will open a position when the stock price is X% above the indicator value. Negative values will open a position when the stock price is X% below the indicator value.">(3 = 3% above, -3 = 3% below)</label>
         <br/>
       </>);
       break;
     case 'BBANDS':
       buyStrategyDOM = (<> 
         {/* Buy strategy % away (BB) */}
-        <label className="input-label">Band to follow:</label>
+        <label className="input-label" data-tooltip="Select bollinger band the backtest will track to open and close positions.">Band to follow:</label>
         <select className="input-select" onChange={(e) => setBuyStrategyType(e.target.value)}>
           {dropdownItems([
             {name:'Middle', value:'Real Middle Band'},
@@ -675,10 +867,10 @@ export const Backtest = ({ backtest }) => {
           ])}
         </select>
         
-        <label className="input-label">Buy at price</label>
+        <label className="input-label" data-tooltip="Open a position on stock for this condition.">Buy at price</label>
         <input className="input-inline" placeholder="-3" onChange={(e) => setBuyStrategyValue(e.target.value)}/>
-        <label className="input-label">% away from the selected line. </label>
-        <label className="input-label-sub">(3 = 3% above, -3 = 3% below)</label>
+        <label className="input-label" data-tooltip="Open a position on stock for this condition.">% away from the selected line. </label>
+        <label className="input-label-sub" data-tooltip="Positive values will open a position when the stock price is X% above the indicator value. Negative values will open a position when the stock price is X% below the indicator value.">(3 = 3% above, -3 = 3% below)</label>
         <br/>
       </>);
       break;
@@ -687,14 +879,20 @@ export const Backtest = ({ backtest }) => {
     
   }
 
+  // Immediately Calculates backtest results (for 'See Example' button on homepage)
+  if(backtest.immediatelyCalculate){
+    onSubmit();
+    backtest.immediatelyCalculate = false;
+  }
+
   return (
     <CSS>
       <div className='settings'>
         {/* Beginning of Settings */}
-        <h4>{backtest.indicator} Settings</h4>
+        <h4 data-tooltip="Settings for calculating technical indicator.">{backtest.indicator} Settings</h4>
 
         {/* series type */}
-        <label className="input-label">Select Series Type:</label>
+        <label className="input-label" data-tooltip="Indicator calculated from open, high, low, or closing prices for each period.">Select Series Type:</label>
         <select className="input-select" onChange={(e) => setSeriesType(e.target.value)}>
           {dropdownItems([
             {name:'open', value:'1. open'},
@@ -707,27 +905,27 @@ export const Backtest = ({ backtest }) => {
 
         <br/>
 
-        <h4>Trading Strategy Settings</h4>
+        <h4 data-tooltip="Settings for calculating buy/sell conditions.">Trading Strategy Settings</h4>
 
         {/* Begin date for backtest */}
-        <label className="input-label">Start Date:</label>
+        <label className="input-label" data-tooltip="Date for the backtest to begin. Leave blank for earliest date.">Start Date:</label>
         <input className="input-flex" type="text" placeholder="IPO date (earliest)" onFocus={(e) => onFocus(e)} onChange={(e) => setStartDate(e.target.value)}/>
               
 
         {/* End date for backtest */}
-        <label className="input-label">End Date:</label>
+        <label className="input-label" data-tooltip="Date for the backtest to end. Leave blank for today's date.">End Date:</label>
         <input className="input-flex" type="text" placeholder={formatDate(getTodayDate())} onFocus={(e) => onFocus(e)} onChange={(e) => setEndDate(e.target.value)}/>
               
         {/* Max number bags */}
-        <label className="input-label">Max number of bags:</label>
+        <label className="input-label" data-tooltip="Max number of positions to have at a given time. Algorithm will not add new positions that would exceed this value.">Max number of positions:</label>
         <input className="input-flex" placeholder="15" onChange={(e) => setMaxBags(e.target.value)} />
 
         {/* Inital balance */}
-        <label className="input-label">Inital balance (USD):</label>
-        <input className="input-flex" min="0" placeholder="10000" onChange={(e) => setInitialBalance(e.target.value)} />
+        <label className="input-label" data-tooltip="Inital balance for backtest algorithm to start trading with.">Inital balance (USD):</label>
+        <input className="input-flex" min="0" placeholder="3000" onChange={(e) => setInitialBalance(e.target.value)} />
 
         {/* Inital buy (type/amount) */}
-        <label className="input-label">Inital buy type:</label>
+        <label className="input-label" data-tooltip="Volume of new positions will be opened in reference to this type of value.">Inital buy type:</label>
         <select className="input-select" onChange={(e) => setInitalBuyType(e.target.value)}>
           {dropdownItems([
             {name:'($) USD', value:'usd'},
@@ -736,15 +934,15 @@ export const Backtest = ({ backtest }) => {
           ])}
         </select>
 
-        <label className="input-label">Inital buy amount:</label>
-        <input className="input-flex" min="0" placeholder="1500" onChange={(e) => setInitalBuyAmount(e.target.value)} />
+        <label className="input-label" data-tooltip="Value for new positions to begin with.">Inital buy amount:</label>
+        <input className="input-flex" min="0" placeholder="100" onChange={(e) => setInitalBuyAmount(e.target.value)} />
 
         {buyStrategyDOM}
 
         {/* Sell Strategy */}
-        <label className="input-label">Sell bags at</label>
+        <label className="input-label" data-tooltip="Close positions when profit meets or exceeds this value.">Sell position at</label>
         <input className="input-inline" placeholder="1" onChange={(e) => setSellStrategyValue(e.target.value)} />
-        <label className="input-label">% profit.</label>
+        <label className="input-label" data-tooltip="Close positions when profit meets or exceeds this value.">% profit.</label>
         <br/>
 
         {/* submit button */}
@@ -757,37 +955,49 @@ export const Backtest = ({ backtest }) => {
       {/* end of settings, beginning of results overview */}
 
       <div className='results-overview'>
-        <h4>Performance Overview {backtest.current_symbol?"("+backtest.current_symbol+")":""}</h4>
+        <h4 data-tooltip="Results of backtest.">Performance Overview {backtest.current_symbol?"("+backtest.current_symbol+")":""}</h4>
         <div className="result-item">
-          <label className="result-title">Profit USD:</label>
+          <label className="result-title" data-tooltip="Total profit of backtest in USD.">Profit USD:</label>
           <label className="result-output">${(backtest.profitUSD?backtest.profitUSD:0).toFixed(2)}</label>
         </div>
         <div className="result-item">
-          <label className="result-title">Profit Percent on Entire Balance: </label>
+          <label className="result-title" data-tooltip="Total profit of backtest in percent.">Profit Percent on Entire Balance: </label>
           <label className="result-output">{(backtest.profitPercentOnBalance ? 100*backtest.profitPercentOnBalance : 0).toFixed(2)}%</label>
         </div>
         <div className="result-item">
-          <label className="result-title">Average profit per trade: </label>
+          <label className="result-title" data-tooltip="Average profit of trades from running backtest.">Average profit per trade: </label>
           <label className="result-output"> {(backtest.profitPercentOnTrades?100*backtest.profitPercentOnTrades:0).toFixed(2)}%</label>
         </div>
         <div className="result-item">
-          <label className="result-title">Number of trades: </label>
+          <label className="result-title" data-tooltip="Number of trades made by backtest.">Number of trades: </label>
           <label className="result-output">{backtest.numTrades? backtest.numTrades:0}</label>
         </div>
         <div className="result-item">
-          <label className="result-title">Average bars per trade: </label>
+          <label className="result-title" data-tooltip="Average number of candles/days between opening and closing each position.">Average bars per trade: </label>
           <label className="result-output">{(backtest.avgBars?backtest.avgBars:0).toFixed(2)}</label>
         </div>
         <div className="result-item">
-          <label className="result-title">Buy and hold return: </label>
+          <label className="result-title" data-tooltip="Return if inital balance had been fully invested at the start date and cashed out at the end date. (instead of running algorithm)">Buy and hold return: </label>
           <label className="result-output">{backtest.holdReturn>0?"+":""}{backtest.holdReturn?backtest.holdReturn:"0"}%</label>
         </div>
+        <div className="result-item">
+          <label className="conclusion-title">Backtest Conclusion: </label>
+          {backtest.didRun?
+            backtest.profitPercentOnBalance>backtest.holdReturn?
+              <label className="backtest-won"> This algorithm is more profitable than buy and holding {backtest.current_symbol}. </label>
+              :
+              <label className="backtest-lost"> Buy and holding {backtest.current_symbol} is more profitable than this algorithm. </label>
+            :
+            <label className="backtest-null">No trades made</label>
+          }
+        </div>
+          
       </div>
       
       {/* End of results overview, begin list of trades */}
 
       <div className='list-of-trades'>
-        <h4>List Of Trades</h4>
+        <h4 data-tooltip="History of positions opened/closed by backtest.">List Of Trades</h4>
         <div className="trades-scroll">
           <TradeList tradeList={tradeListData.map(tradeData => tradeData)}/>
         </div>
