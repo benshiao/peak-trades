@@ -16,9 +16,7 @@ export const Footer = () => {
   return (
     <CSS>
       <p>
-        PeakTrades is a personal project developed by {" "}
-        <a className="" href="https://www.linkedin.com/in/benshiao" rel="noreferrer" target="_blank">Benjamin Shiao</a> 
-        {" "}using React, Javascript, D3 graphs, and Alphavantage’s stock API. 
+        AlgoTrade is a personal project developed by Han using React and Alphavantage’s stock API. 
       </p>
     </CSS>
   )

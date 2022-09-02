@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import styled from "styled-components";
-import uuid from 'uuid';
+import {v1 as uuid} from "uuid"; 
 import { GlobalContext } from '../context/GlobalState';
 
 const CSS = styled.div`
@@ -108,28 +108,21 @@ const CSS = styled.div`
 `;
 
 export const Homepage = () => {
-  const { graphSymbol, addBacktest } = useContext(GlobalContext);
+  const { addBacktest } = useContext(GlobalContext);
+  const { graphSymbol } = useContext(GlobalContext);
+
 
   return (
     <CSS>
       <div className="main-box"> 
         <div className="intro-text">
-          <h4>PeakTrades</h4>
+          <h4>AlgoTrade</h4>
           <p className="intro-text-p">
-            Simple, yet powerful tool to run backtests for algorithm trading strategies and to visualize stock market data.
+            Simple, yet powerful tool to run backtests for algorithmic trading strategies and to visualize stock market data.
           </p>
           {/** This button will graph SPY and run a BB backtest */}
-          <button className="share-button" onClick={() => {
-              graphSymbol("SPY", "S&P 500 ETF TRUST ETF", "year", true);
-              addBacktest({
-                id: uuid(),
-                indicator: "BBANDS",
-                immediatelyCalculate: true
-              });
-            }}>
-            <span>See Example ➤</span>
-            <p className="share-button-p">Running Backtest on SPY...</p>
-          </button>
+          
+          
         </div>
         <img className="img-chart" src="chart-img.png" alt=""/>
       </div>

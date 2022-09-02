@@ -130,14 +130,14 @@ export const Header = () => {
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossOrigin="anonymous"></link>
       <nav className="header">
       
-        <img className="logo-img" src="cs-chart.png" alt=""/>
-        <div className="title" >PeakTrades</div>
+        <img className="logo-img" src="icons8-money-80.png" alt=""/>
+        <div className="title" >AlgoTrade</div>
           
 
         <div className="search-credits">
           <div className="search__container"> 
             <form  onSubmit={onSubmit}>
-              <label className="search__title">Search Comapny:</label>
+              <label className="search__title" style={{paddingLeft:80}}>Search Company:</label>
               <input className="search__input" type="text" placeholder="Search Tickers..." onChange={(e) => setSearch(e.target.value)}/>
               
             </form>
@@ -146,7 +146,7 @@ export const Header = () => {
 
 
           <div className="credits">
-            by <a className="" href="https://www.linkedin.com/in/benshiao" rel="noreferrer" target="_blank">Benjamin Shiao</a>
+             <a className="" href="https://www.linkedin.com/in/john-duan/" rel="noreferrer" target="_blank" style={{color:"#61dafb"}}> By Han</a>
           </div>
         </div>
 

@@ -428,7 +428,7 @@ When creating a mutable projection, the *mutate* function is typically not expos
 
 <a name="geoArea" href="#geoArea">#</a> d3.<b>geoArea</b>(<i>object</i>) [<>](https://github.com/d3/d3-geo/blob/master/src/area.js "Source")
 
-Returns the spherical area of the specified GeoJSON *object* in [steradians](http://mathworld.wolfram.com/Steradian.html). This is the spherical equivalent of [*path*.area](#path_area).
+Returns the spherical area of the specified GeoJSON *object* in [steradians](https://en.wikipedia.org/wiki/Steradian). This is the spherical equivalent of [*path*.area](#path_area).
 
 <a name="geoBounds" href="#geoBounds">#</a> d3.<b>geoBounds</b>(<i>object</i>) [<>](https://github.com/d3/d3-geo/blob/master/src/bounds.js "Source")
 

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import styled from "styled-components";
-import uuid from 'uuid';
+import {v1 as uuid} from "uuid"; 
 import { GlobalContext } from '../context/GlobalState';
 
 
